@@ -3,8 +3,18 @@
 {% block content %}
   <form>
     <table>
-      {{ form }}
+      {{ form.as_p }}
     </table>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Отправить">
   </form>
+  {% with data=request.GET %}
+    {% if form.is_valid %}
+      <h2>Привет, {{ data.first_name }} {{ data.last_name }}</h2>
+      {% if birthday_countdown == 0 %}
+        С днём рождения!
+      {% else %}
+        Осталось дней до дня рождения: {{ birthday_countdown }}!
+      {% endif %}
+    {% endif %}
+  {% endwith %}
 {% endblock %}
