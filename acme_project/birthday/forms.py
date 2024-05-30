@@ -5,6 +5,8 @@ from .models import Birthday
 
 class BirthdayForm(forms.ModelForm):
     '''
+    Se utiliza forms.Form si no hay un modelo adjunto:
+
     first_name = forms.CharField(
         label='Имя', max_length=20
     )
