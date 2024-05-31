@@ -14,5 +14,13 @@ class Birthday(models.Model):
         'Дата рождения', validators=(real_age,)
     )
 
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                fields=('first_name', 'last_name'),
+                name='Unique person constraint',
+            ),
+        )
+
     def __str__(self):
         return self.first_name

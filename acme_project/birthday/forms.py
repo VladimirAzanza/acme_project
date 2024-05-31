@@ -31,6 +31,8 @@ class BirthdayForm(forms.ModelForm):
         return first_name.split()[0]
 
     def clean(self):
+        super().clean()
+        '''
         first_name = self.cleaned_data['first_name']
         last_name = self.cleaned_data['last_name']
         if Birthday.objects.filter(
@@ -40,3 +42,4 @@ class BirthdayForm(forms.ModelForm):
             raise ValidationError(
                 'введите, пожалуйста, другое имя'
             )
+        '''
