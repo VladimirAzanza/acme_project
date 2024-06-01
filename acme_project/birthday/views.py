@@ -10,16 +10,20 @@ from .models import Birthday
 
 class BirthdayMixin:
     model = Birthday
-    form_class = BirthdayForm
-    template_name = 'birthday/birthday.html'
     success_url = reverse_lazy('birthday:list')
 
 
-class BirthdayCreateView(BirthdayMixin, CreateView):
+class BirthdayFormMixin:
+    form_class = BirthdayForm
+    # if template name is birthday_form we dont have to write template_name.
+    template_name = 'birthday/birthday.html'
+
+
+class BirthdayCreateView(BirthdayMixin, BirthdayFormMixin, CreateView):
     pass
 
 
-class BirthdayUpdateView(BirthdayMixin, UpdateView):
+class BirthdayUpdateView(BirthdayMixin, BirthdayFormMixin, UpdateView):
     pass
 
 
@@ -29,9 +33,8 @@ class BirthdayListView(ListView):
     paginate_by = 10
 
 
-class BirthdayDeleteView(DeleteView):
-    model = Birthday
-    success_url = reverse_lazy('birthday:list')
+class BirthdayDeleteView(BirthdayMixin, DeleteView):
+    pass
 
 
 '''
