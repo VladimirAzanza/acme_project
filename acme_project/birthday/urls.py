@@ -12,6 +12,9 @@ urlpatterns = [
         'list/', views.BirthdayListView.as_view(), name='list'
     ),
     path(
+        '<int:pk>/', views.BirthdayDetailView.as_view(), name='detail'
+    ),
+    path(
         '<int:pk>/edit/', views.BirthdayUpdateView.as_view(), name='edit'
     ),
     path(
