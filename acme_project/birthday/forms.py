@@ -6,18 +6,18 @@ from .models import Birthday
 
 class BirthdayForm(forms.ModelForm):
     '''
-    Se utiliza forms.Form si no hay un modelo adjunto:
+        forms.Form are used if there is no associated model:
 
-    first_name = forms.CharField(
-        label='Имя', max_length=20
-    )
-    last_name = forms.CharField(
-        label='Фамилия', required=False, help_text='Необязательное поле'
-    )
-    birthday = forms.DateField(
-        label='Дата рождения',
-        widget=forms.DateInput(attrs={'type': 'date'})
-    )
+        first_name = forms.CharField(
+            label='Имя', max_length=20
+        )
+        last_name = forms.CharField(
+            label='Фамилия', required=False, help_text='Необязательное поле'
+        )
+        birthday = forms.DateField(
+            label='Дата рождения',
+            widget=forms.DateInput(attrs={'type': 'date'})
+        )
     '''
     class Meta:
         model = Birthday
