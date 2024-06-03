@@ -12,7 +12,6 @@ from .utils import calculate_birthday_countdown
 
 class BirthdayMixin:
     model = Birthday
-    success_url = reverse_lazy('birthday:list')
 
 
 class BirthdayFormMixin:
@@ -47,7 +46,7 @@ class BirthdayListView(ListView):
 
 
 class BirthdayDeleteView(BirthdayMixin, DeleteView):
-    pass
+    success_url = reverse_lazy('birthday:list')
 
 
 '''
