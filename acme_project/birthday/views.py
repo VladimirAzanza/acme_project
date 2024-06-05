@@ -1,5 +1,6 @@
 # from django.core.paginator import Paginator
 # from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
@@ -20,15 +21,21 @@ class BirthdayFormMixin:
     template_name = 'birthday/birthday.html'
 
 
-class BirthdayCreateView(BirthdayMixin, BirthdayFormMixin, CreateView):
+class BirthdayCreateView(
+    BirthdayMixin, BirthdayFormMixin, LoginRequiredMixin, CreateView
+):
     pass
 
 
-class BirthdayUpdateView(BirthdayMixin, BirthdayFormMixin, UpdateView):
+class BirthdayUpdateView(
+    BirthdayMixin, BirthdayFormMixin, LoginRequiredMixin, UpdateView
+):
     pass
 
 
-class BirthdayDetailView(DetailView):
+class BirthdayDetailView(
+    LoginRequiredMixin, DetailView
+):
     model = Birthday
 
     def get_context_data(self, **kwargs):
@@ -39,13 +46,17 @@ class BirthdayDetailView(DetailView):
         return context
 
 
-class BirthdayListView(ListView):
+class BirthdayListView(
+    LoginRequiredMixin, ListView
+):
     model = Birthday
     ordering = 'id'
     paginate_by = 10
 
 
-class BirthdayDeleteView(BirthdayMixin, DeleteView):
+class BirthdayDeleteView(
+    BirthdayMixin, LoginRequiredMixin, DeleteView
+):
     success_url = reverse_lazy('birthday:list')
 
 
