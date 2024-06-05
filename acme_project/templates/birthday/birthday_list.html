@@ -14,12 +14,14 @@
           <a href="{% url 'birthday:detail' birthday.id %}">Сколько до дня рождения?</a>
         </div>
         <div>
-          <a href="{% url 'birthday:edit' birthday.id %}">
-            Изменить запись
-          </a>&emsp;|
-          <a href="{% url 'birthday:delete' birthday.id %}">
-            Удалить запись
-          </a>
+          {% if birthday.author == user %}
+            <a href="{% url 'birthday:edit' birthday.id %}">
+              Изменить запись
+            </a>&emsp;|
+            <a href="{% url 'birthday:delete' birthday.id %}">
+              Удалить запись
+            </a>
+          {% endif %}
         </div>
       </div>
       {% if not forloop.last %}
