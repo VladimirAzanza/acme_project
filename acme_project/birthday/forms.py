@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import Birthday
+from .models import Birthday, Congratulation
 
 
 class BirthdayForm(forms.ModelForm):
@@ -43,3 +43,10 @@ class BirthdayForm(forms.ModelForm):
                 'введите, пожалуйста, другое имя'
             )
         '''
+
+
+class CongratulationForm(forms.ModelForm):
+
+    class Meta:
+        model = Congratulation
+        fields = ('text',)
