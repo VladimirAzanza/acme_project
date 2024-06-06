@@ -9,9 +9,6 @@ User = get_user_model()
 
 
 class Birthday(models.Model):
-    author = models.ForeignKey(
-        User, verbose_name='Автор записи', on_delete=models.CASCADE, null=True
-    )
     first_name = models.CharField(
         'Имя', max_length=20
     )
@@ -23,6 +20,9 @@ class Birthday(models.Model):
     )
     image = models.ImageField(
         'Фото', upload_to='birthdays_images', blank=True
+    )
+    author = models.ForeignKey(
+        User, verbose_name='Автор записи', on_delete=models.CASCADE, null=True
     )
 
     class Meta:
@@ -38,3 +38,17 @@ class Birthday(models.Model):
 
     def __str__(self):
         return self.first_name
+
+
+class Congratulation(models.Model):
+    text = models.TextField('Текст поздравления')
+    birthday = models.ForeignKey(
+        Birthday,
+        on_delete=models.CASCADE,
+        related_name='congratulations',
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('created_at',)
